@@ -17,7 +17,7 @@ import java.net.UnknownHostException;
  * @author ruiran
  */
 public class SocketClient {
-    public static void main(String[] args) {
+    public static void init () {
         try {
             final Socket client = new Socket("127.0.0.1", 9999);
 
@@ -31,6 +31,10 @@ public class SocketClient {
                       
                         while (true) {
                             String message = reader.readLine();
+                            
+                            if (message == null || message.isEmpty())
+                                continue;
+                            
                             System.out.println("O servidor disse: " + message);
                         }
                         

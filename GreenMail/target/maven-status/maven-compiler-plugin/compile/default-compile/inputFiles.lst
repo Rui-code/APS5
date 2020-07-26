@@ -1,7 +1,14 @@
 /home/ruiran/NetBeansProjects/GreenMail/src/main/java/module-info.java
 /home/ruiran/NetBeansProjects/GreenMail/src/main/java/com/aps6/greenmail/App.java
+/home/ruiran/NetBeansProjects/GreenMail/src/main/java/com/aps6/greenmail/DAO/UserDAO.java
+/home/ruiran/NetBeansProjects/GreenMail/src/main/java/com/aps6/greenmail/mailsend/MailSender.java
+/home/ruiran/NetBeansProjects/GreenMail/src/main/java/com/aps6/greenmail/chat/SocketServer.java
+/home/ruiran/NetBeansProjects/GreenMail/src/main/java/com/aps6/greenmail/chat/ClientHandler.java
+/home/ruiran/NetBeansProjects/GreenMail/src/main/java/com/aps6/greenmail/models/User.java
+/home/ruiran/NetBeansProjects/GreenMail/src/main/java/com/aps6/greenmail/chat/SocketClient.java
 /home/ruiran/NetBeansProjects/GreenMail/src/main/java/com/aps6/greenmail/LoginController.java
 /home/ruiran/NetBeansProjects/GreenMail/src/main/java/com/aps6/greenmail/SecondaryController.java
 /home/ruiran/NetBeansProjects/GreenMail/src/main/java/com/aps6/greenmail/PrimaryController.java
 /home/ruiran/NetBeansProjects/GreenMail/src/main/java/com/aps6/greenmail/ChatAndMailController.java
+/home/ruiran/NetBeansProjects/GreenMail/src/main/java/com/aps6/greenmail/connection/ConnectionFactory.java
 /home/ruiran/NetBeansProjects/GreenMail/src/main/java/com/aps6/greenmail/SignUpController.java

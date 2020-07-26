@@ -8,7 +8,7 @@ public class ConnectionFactory {
     public Connection getConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
-            return DriverManager.getConnection("jdbc:sqlite:users.test.db");
+            return DriverManager.getConnection("jdbc:sqlite:users.db");
         } catch (SQLException | ClassNotFoundException exception) {
             throw new RuntimeException(exception);
         }

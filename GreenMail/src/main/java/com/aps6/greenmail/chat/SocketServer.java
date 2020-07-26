@@ -15,7 +15,7 @@ import java.net.Socket;
  */
 public class SocketServer {
     
-    public static void main(String[] args) {
+    public static void init() {
         
         ServerSocket server = null;
         

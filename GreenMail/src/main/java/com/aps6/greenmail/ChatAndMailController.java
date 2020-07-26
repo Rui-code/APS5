@@ -5,8 +5,11 @@
  */
 package com.aps6.greenmail;
 
+import com.aps6.greenmail.mailsend.MailSender;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -62,6 +65,15 @@ public class ChatAndMailController implements Initializable {
     void sendMail(ActionEvent event) throws IOException {
         if (areFieldsFilled()) {
             errorLabel.setText("Enviando email!");
+            
+            String[] recipients = null;
+            
+            recipients = toText.getText().split(";");
+            
+            MailSender sender = new MailSender();
+            sender.setMessage(emailText.getText(), passwordText.getText(), 
+                    recipients, subjectText.getText(), contentText.getText());
+            
         } else {
             errorLabel.setText("Todos os campos precisam estar preenchidos.");
         }

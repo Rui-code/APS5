@@ -5,6 +5,9 @@
  */
 package com.aps6.greenmail;
 
+import com.aps6.greenmail.DAO.UserDAO;
+import com.aps6.greenmail.chat.SocketClient;
+import com.aps6.greenmail.models.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,11 +40,21 @@ public class LoginController implements Initializable {
         if (passwordInput.getText().equals("") || userInput.getText().equals("")) {
             labelError.setText("Todos os campos precisam estar preenchidos para continuar.");
         } else {
-            // Enviar dados para o dao validar..
-            labelError.setText("Validação completa!");
-            App.setRoot("ChatAndMail");
-        }
-        
+            // Enviar dados para o dao validar..            
+            User newUser = new User();
+            newUser.setUserName(userInput.getText());
+            newUser.setPassword(passwordInput.getText());
+            
+            UserDAO newUserDAO = new UserDAO();
+            if (!newUserDAO.UserExists(newUser)) {
+                labelError.setText("Usuario não existe.");
+            } else {
+                App.setRoot("ChatAndMail");
+                // startar o cliente do chat
+                SocketClient.init();
+                
+            }
+        }       
     }
     
     @FXML

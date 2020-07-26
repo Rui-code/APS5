@@ -1,5 +1,6 @@
 package com.aps6.greenmail;
 
+import com.aps6.greenmail.chat.SocketServer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,6 +34,7 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+        SocketServer.init();
     }
 
 }

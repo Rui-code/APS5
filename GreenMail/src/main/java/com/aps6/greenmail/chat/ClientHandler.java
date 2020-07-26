@@ -25,6 +25,7 @@ public class ClientHandler extends Thread {
             new HashMap<String, ClientHandler>();
     private BufferedReader reader;
     private PrintWriter writer;
+    private String message;
 
     public ClientHandler(Socket client) {
         this.client = client;
@@ -42,20 +43,22 @@ public class ClientHandler extends Thread {
             writer = new PrintWriter(
                     client.getOutputStream(), true);
             getWriter().println("Escreva o seu nome: ");            
-            String message = getReader().readLine();
-            this.clientName = message;
+            setMessage(getReader().readLine());
+            this.clientName = getMessage().toLowerCase().replaceAll(",", "");
             getWriter().println("Olá " + this.getClientName());
-            clients.put(message, this);
+            clients.put(getMessage(), this);
+            setMessage(getClientName() + " entrou");
+            broadcast2();
             
             while (true) {
-                message = getReader().readLine();
-                if (message.equalsIgnoreCase("!q")) {
+                setMessage(getReader().readLine());
+                if (getMessage().equalsIgnoreCase("!q")) {
                     this.client.close();
 
-                } else if (message.toLowerCase().startsWith("!m")) {
-                    String messageToName = message.substring(2, message.length());
+                } else if (getMessage().toLowerCase().startsWith("!m")) {
+                    String messageToName = getMessage().substring(2, getMessage().length());
                     
-                    clients.get(message.subSequence(2, message.length()));
+                    clients.get(getMessage().subSequence(2, getMessage().length()));
                     
                     ClientHandler messageTo = clients.get(messageToName);
                     
@@ -69,17 +72,40 @@ public class ClientHandler extends Thread {
                     }
                     
                     
-                } else {
-                    writer.println(this.getClientName() + 
-                            ", você disse: " + message);
+                } else if (getMessage().equals("!lc")) {
+                    StringBuffer str = new StringBuffer();
+                    for (String c : clients.keySet()) {
+                        str.append(c);
+                        str.append(", ");
+                    }
+                    
+                    str.delete(str.length() - 2, str.length());
+                    writer.println(str.toString());
+                } else {                 
+                    broadcast();
                 }
             }
             
         } catch (IOException ex) {
+            setMessage(getClientName() + " saiu");
+            broadcast2();
             System.err.println(getClientName() + " fechou a conexão");
         }
     }
-
+    
+    private void broadcast () {
+        for (ClientHandler client : clients.values()) {
+            client.getWriter().println(this.getClientName() + 
+                " : " + getMessage());                        
+        }    
+    }
+    
+    private void broadcast2 () {
+        for (ClientHandler client : clients.values()) {
+            client.getWriter().println(getMessage());                        
+        }    
+    }
+    
     /**
      * @return the reader
      */
@@ -99,6 +125,20 @@ public class ClientHandler extends Thread {
      */
     public String getClientName() {
         return clientName;
+    }
+
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * @param message the message to set
+     */
+    public void setMessage(String message) {
+        this.message = message;
     }
     
     

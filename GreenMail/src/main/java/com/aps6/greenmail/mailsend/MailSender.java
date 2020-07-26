@@ -6,14 +6,21 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class MailSender {
-    public static void main(String[] args) {
 
-        String userName = "ruiranoliveirasantos@gmail.com";
-        String password = "";
-        String[] recipients = {"ruiran_oliveira2009@hotmail.com"};
-        String subject = "Teste";
-        String content = "<p>Teste APS</p>";
+    private String userName;
+    private String password;
+    private String[] recipients;
+    private String subject;
+    private String content;
+    
+    public void setMessage(String userName, String password, 
+            String[] recipients, String subject, String content) {
 
+        this.userName = "";
+        this.password = "";
+        this.recipients = null;
+        this.subject = "";
+        this.content = "";
 
         try {
             sendMail(userName, password, recipients, subject, content);
@@ -28,7 +35,7 @@ public class MailSender {
             throws MessagingException {
 
         Message message = new MimeMessage(createSession(userName, password));
-        message.setFrom(new InternetAddress("ruiranoliveirasantos@gmail.com"));
+        message.setFrom(new InternetAddress(userName));
 
         Address[] toUser = {};
 
